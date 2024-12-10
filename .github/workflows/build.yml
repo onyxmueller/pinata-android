@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: set up JDK
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: zulu
@@ -45,3 +45,6 @@ jobs:
       - name: Build with Gradle
         run: |
           ./gradlew --scan --stacktrace assembleDebug
+        env:
+          PINATA_JWT_TOKEN: "" # Empty value for CI build purposes
+          PINATA_GATEWAY: "" # Empty value for CI build purposes
