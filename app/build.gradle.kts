@@ -8,7 +8,7 @@ plugins {
 
 fun getProperty(filename: String, propName: String): String? {
     val propsFile = rootProject.file(filename)
-    if (!propsFile.exists()) {
+    if (propsFile.exists()) {
         propsFile.inputStream().use { inputStream ->  // Resource management with 'use'
             val properties = Properties()
             properties.load(inputStream)

@@ -20,6 +20,9 @@ jobs:
           java-version: 17
       - name: Spotless
         run: ./gradlew spotlessCheck
+        env:
+          PINATA_JWT_TOKEN: "" # Empty value for CI build purposes
+          PINATA_GATEWAY: "" # Empty value for CI build purposes
 
   build:
     runs-on: ubuntu-latest
