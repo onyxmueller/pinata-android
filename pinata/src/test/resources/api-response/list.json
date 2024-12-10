@@ -1,0 +1,33 @@
+{
+  "data": {
+    "files": [
+      {
+        "id": "11111111-2222-3333-4444-555555555555",
+        "name": "image.jpg",
+        "cid": "AAAAAeigmtgespyq535sthcb7uj2vz7vszvx5k4tgw3k6v6nf33izjBBBBB",
+        "size": 2048,
+        "number_of_files": 1,
+        "mime_type": "image/jpeg",
+        "group_id": null,
+        "keyvalues": {},
+        "created_at": "2024-12-08T22:55:04.341078Z"
+      },
+      {
+        "id": "66666666-7777-8888-9999-000000000000",
+        "name": "other_image.jpg",
+        "cid": "CCCCCeigmtgespyq535sthcb7uj2vz7vszvx5k4tgw3k6v6nf33izjDDDDD",
+        "size": 1024,
+        "number_of_files": 1,
+        "mime_type": "image/jpeg",
+        "group_id": "01935c70-3b13-77dd-bd3b-c2e4bf7c2d1f",
+        "keyvalues": {
+          "date": "2024",
+          "description": "waterfall",
+          "published": "true"
+        },
+        "created_at": "2024-12-10T01:48:29.66311Z"
+      }
+    ],
+    "next_page_token": "MDE5MzRjNjgtMDIyYS03MTM5LWI1ZGMtZDQ0MGExMDRhZTRm"
+  }
+}
