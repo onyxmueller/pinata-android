@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException
 import java.util.Properties
 
 plugins {
@@ -10,14 +9,13 @@ plugins {
 fun getProperty(filename: String, propName: String): String? {
     val propsFile = rootProject.file(filename)
     if (!propsFile.exists()) {
-        throw FileNotFoundException("$filename does not exist!")
-    }
-
-    propsFile.inputStream().use { inputStream ->  // Resource management with 'use'
-        val properties = Properties()
-        properties.load(inputStream)
-        return properties.getProperty(propName)  // Returns null if property not found
-            ?: throw NoSuchElementException("No such property '$propName' in file '$filename'")
+        propsFile.inputStream().use { inputStream ->  // Resource management with 'use'
+            val properties = Properties()
+            properties.load(inputStream)
+            return properties.getProperty(propName)  // Returns null if property not found
+        }
+    } else {
+        return System.getenv(propName)
     }
 }
 
