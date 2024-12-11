@@ -6,7 +6,7 @@
   <a href="https://github.com/onyxmueller/pinata-android/actions"><img alt="Build Status" src="https://github.com/onyxmueller/pinata-android/actions/workflows/build.yml/badge.svg"/></a>
 </p>
 
-The Pinata Android library provides convenient access to the Pinata API from your Android applications.
+[Pinata is the Internet's File API](https://pinata.cloud/), allowing you to upload, manage, and deliver your files effortlessly—no drama, no compromises. The Pinata Android library, you can now bring Pinata’s powerful file-handling capabilities directly into your Android/Kotlin apps quickly and easily.
 
 ## Download
 [![Maven Central](https://img.shields.io/maven-central/v/net.onyxmueller.pinata/pinata.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/net.onyxmueller.pinata/pinata)
@@ -23,41 +23,72 @@ dependencies {
 
 ## Documentation
 
+## Usage
+
+To access the API, you'll need to pass your [Pinata API Key JWT](https://docs.pinata.cloud/account-management/api-keys) and [Dedicated Gateway Domain](https://docs.pinata.cloud/gateways/retrieving-files). More details at https://docs.pinata.cloud/quickstart.
+
+```kotlin
+        val pinataClient = PinataClient.get(PINATA_JWT_TOKEN, PINATA_GATEWAY)
+```
+
+### Files API
+
+```kotlin
+// Upload a file
+val filesDir = applicationContext.filesDir
+val file = File(filesDir, "image.jpg")
+val uploadResult = pinataClient.files.upload(file.name, Uri.fromFile(file))
+
+// List all files
+val listResult = pinataClient.files.list()
+
+// Filter on files
+val filteredListResult = pinataClient.files.list(name = "image.jpg")
+
+// Get a specific file
+val fileResult = pinataClient.files.get("1234567890")
+
+// Create signed URL
+val signResult = pinataClient.files.sign("1234567890", 604800) // expires in a week
+
+// Update a file
+val updateResult = pinataClient.files.update("1234567890", "new_name.jpg", mapOf("location" to "Earth"))
+
+// Delete a file
+val deleteResult = pinataClient.files.delete("1234567890")
+```
+
 ### PinataApiResponse
 
 `PinataApiResponse` serves as an interface designed to create consistent responses from the Pinata API. It offers convenient extensions to manage your payloads, encompassing both body data and exceptional scenarios. `PinataApiResponse` encompasses three distinct types: **Success**, **Error**, and **Exception**.
 
-#### PinataApiResponse.Success
+#### PinataApiResponse Extensions
 
-This represents a successful response from the Pinata API. You can create an instance of [PinataApiResponse.Success] by giving the generic type and data.
+You can effectively handle PinataApiResponse using the following extensions:
 
-```kotlin
-val apiResponse = PinataApiResponse.Success(data = myData)
-val data = apiResponse.data
-```
+- onSuccess: Executes when the PinataApiResponse is of type ApiResponse.Success. Within this scope, you can directly access the body `data`.
+- onError: Executes when the PinataApiResponse is of type PinataApiResponse.Error. Here, you can access the error `code` and `message` here.
+- onException: Executes when the ApiResponse is of type PinataApiResponse.Exception. You can access the exception here.
 
-#### PinataApiResponse.Exception
-
-This signals a failed tasks captured by unexpected exceptions during a Pinata API request creation or response processing on the client side, such as a network connection failure. You can obtain exception details from the `PinataApiResponse.Exception`.
+Each scope operates according to its corresponding ApiResponse type:
 
 ```kotlin
-val apiResponse = PinataApiResponse.Exception(exception = HttpTimeoutException())
-val exception = apiResponse.exception
-val message = apiResponse.message
+val response = pinataClient.files.list()
+response.onSuccess {
+    // this scope will be executed if the request successful.
+    // handle the success case
+  }.onError {
+    // this scope will be executed when the request failed with errors.
+    // handle the error case
+  }.onException {
+   // this scope will be executed when the request failed with exceptions.
+   // handle the exception case
+  }
 ```
 
-#### PinataApiResponse.Error
-
-This denotes a failed Pinata API request, typically due to bad requests or internal server errors. You can additionally put an error payload that can contain detailed error information.
-
-```kotlin
-val apiResponse = PinataApiResponse.Error(payload = errorBody)
-val payload = apiResponse.payload
-```
-
-## Find this library useful? :heart:
+## Find this library useful? :raised_hands:
 Support it by joining __[stargazers](https://github.com/onyxmueller/pinata-android/stargazers)__ for this repository. :star: <br>
-And __[follow](https://github.com/onyxmueller)__ me for my next creations! 🤩
+And __[follow](https://github.com/onyxmueller)__ me for other creations.
 
 # License
 ```xml
