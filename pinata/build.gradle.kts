@@ -12,7 +12,7 @@ mavenPublishing {
     coordinates(
         "net.onyxmueller.pinata",
         artifactId,
-        "0.1.0"
+        "0.1.1"
     )
 
     pom {
@@ -76,12 +76,10 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
     implementation(libs.okhttp)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.gson)
-    testImplementation(libs.junit)
     // unit test
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
