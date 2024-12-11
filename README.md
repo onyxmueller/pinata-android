@@ -9,7 +9,7 @@
 The Pinata Android library provides convenient access to the Pinata API from your Android applications.
 
 ## Download
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.skydoves/sandwich.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.skydoves%22%20AND%20a:%22sandwich%22)
+[![Maven Central](https://img.shields.io/maven-central/v/net.onyxmueller.pinata/pinata.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/net.onyxmueller.pinata/pinata)
 
 ### Gradle
 
