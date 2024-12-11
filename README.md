@@ -6,7 +6,7 @@
   <a href="https://github.com/onyxmueller/pinata-android/actions"><img alt="Build Status" src="https://github.com/onyxmueller/pinata-android/actions/workflows/build.yml/badge.svg"/></a>
 </p>
 
-[Pinata is the Internet's File API](https://pinata.cloud/), allowing you to upload, manage, and deliver your files effortlessly—no drama, no compromises. The Pinata Android library, you can now bring Pinata’s powerful file-handling capabilities directly into your Android/Kotlin apps quickly and easily.
+[Pinata is the Internet's File API](https://pinata.cloud/), allowing you to upload, manage, and deliver your files effortlessly—no drama, no compromises. With Pinata Android library, you can now bring Pinata’s powerful file-handling capabilities directly into your Android/Kotlin apps quickly and easily.
 
 ## Download
 [![Maven Central](https://img.shields.io/maven-central/v/net.onyxmueller.pinata/pinata.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/net.onyxmueller.pinata/pinata)
@@ -17,7 +17,7 @@ Add the dependency below into your **module**'s `build.gradle` file:
 
 ```gradle
 dependencies {
-    implementation("net.onyxmueller.pinata:pinata:0.1.0")
+    implementation("net.onyxmueller.pinata:pinata:0.1.1")
 }
 ```
 
