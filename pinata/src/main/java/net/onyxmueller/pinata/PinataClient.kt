@@ -112,11 +112,13 @@ class PinataClient internal constructor(jwtToken: String, gatewayUrl: String) {
                 )
             )
 
-        suspend fun upload(name: String, fileUri: Uri): PinataApiResponse<File> =
-            uploadsApi.upload(
-                FileApiRequestHelper.toRequestBody(name),
-                FileApiRequestHelper.prepareFilePart("file", fileUri)
+        suspend fun upload(file: java.io.File, customName: String? = null): PinataApiResponse<File> {
+            val fileName = if (customName.isNullOrEmpty()) file.name else customName
+            return uploadsApi.upload(
+                FileApiRequestHelper.toRequestBody(fileName),
+                FileApiRequestHelper.prepareFilePart("file", Uri.fromFile(file))
             )
+        }
 
         suspend fun update(id: String, name: String? = null, keyvalues: Map<String, Any>? = null) =
             filesApi.update(id, UpdateData(name, keyvalues))
