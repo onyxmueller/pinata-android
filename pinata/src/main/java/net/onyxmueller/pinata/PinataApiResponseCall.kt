@@ -8,33 +8,42 @@ import retrofit2.HttpException
 import retrofit2.Response
 
 class PinataApiResponseCall<T : Any>(
-    private val proxy: Call<T>
+    private val proxy: Call<T>,
 ) : Call<PinataApiResponse<T>> {
-
     override fun enqueue(callback: Callback<PinataApiResponse<T>>) {
-        proxy.enqueue(object : Callback<T> {
-            override fun onResponse(call: Call<T>, response: Response<T>) {
-                val networkResult = handleApi { response }
-                callback.onResponse(this@PinataApiResponseCall, Response.success(networkResult))
-            }
+        proxy.enqueue(
+            object : Callback<T> {
+                override fun onResponse(call: Call<T>, response: Response<T>) {
+                    val networkResult = handleApi { response }
+                    callback.onResponse(this@PinataApiResponseCall, Response.success(networkResult))
+                }
 
-            override fun onFailure(call: Call<T>, t: Throwable) {
-                val networkResult = PinataApiResponse.Exception<T>(t)
-                callback.onResponse(this@PinataApiResponseCall, Response.success(networkResult))
-            }
-        })
+                override fun onFailure(call: Call<T>, t: Throwable) {
+                    val networkResult = PinataApiResponse.Exception<T>(t)
+                    callback.onResponse(this@PinataApiResponseCall, Response.success(networkResult))
+                }
+            },
+        )
     }
 
     override fun execute(): Response<PinataApiResponse<T>> = throw NotImplementedError()
+
     override fun clone(): Call<PinataApiResponse<T>> = PinataApiResponseCall(proxy.clone())
+
     override fun request(): Request = proxy.request()
+
     override fun timeout(): Timeout = proxy.timeout()
+
     override fun isExecuted(): Boolean = proxy.isExecuted
+
     override fun isCanceled(): Boolean = proxy.isCanceled
-    override fun cancel() { proxy.cancel() }
+
+    override fun cancel() {
+        proxy.cancel()
+    }
 
     fun <T : Any> handleApi(
-        execute: () -> Response<T>
+        execute: () -> Response<T>,
     ): PinataApiResponse<T> {
         return try {
             val response = execute()

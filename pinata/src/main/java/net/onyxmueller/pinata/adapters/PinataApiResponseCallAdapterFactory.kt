@@ -8,11 +8,10 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 internal class PinataApiResponseCallAdapterFactory private constructor() : CallAdapter.Factory() {
-
     override fun get(
         returnType: Type,
         annotations: Array<out Annotation>,
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): CallAdapter<*, *>? {
         if (getRawType(returnType) != Call::class.java) {
             return null

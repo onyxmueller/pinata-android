@@ -1,5 +1,3 @@
-import com.vanniktech.maven.publish.SonatypeHost
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -12,14 +10,14 @@ mavenPublishing {
     coordinates(
         "net.onyxmueller.pinata",
         artifactId,
-        "0.1.1"
+        "0.1.1",
     )
 
     pom {
         name.set("Pinata")
         description.set(
             "The Pinata library provides convenient access to the Pinata API for Kotlin and " +
-                    "Android applications."
+                "Android applications.",
         )
         inceptionYear.set("2024")
         url.set("https://github.com/onyxmueller/pinata-android/")
@@ -61,7 +59,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }

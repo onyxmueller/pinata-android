@@ -3,7 +3,7 @@ package net.onyxmueller.pinata.files.model
 import com.google.gson.annotations.SerializedName
 import java.util.Date
 
-data class File (
+data class File(
     var id: String,
     var name: String,
     var cid: String,

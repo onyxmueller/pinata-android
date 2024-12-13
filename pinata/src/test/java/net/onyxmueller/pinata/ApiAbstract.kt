@@ -17,7 +17,6 @@ import java.nio.charset.StandardCharsets
 
 @RunWith(JUnit4::class)
 internal abstract class ApiAbstract<T> {
-
     private lateinit var mockWebServer: MockWebServer
 
     @Before
@@ -46,9 +45,10 @@ internal abstract class ApiAbstract<T> {
     }
 
     fun createService(clazz: Class<T>): T {
-        val gson = GsonBuilder()
-            .registerTypeAdapterFactory(ItemTypeAdapterFactory())
-            .create()
+        val gson =
+            GsonBuilder()
+                .registerTypeAdapterFactory(ItemTypeAdapterFactory())
+                .create()
         return Retrofit.Builder()
             .baseUrl(mockWebServer.url("/"))
             .addConverterFactory(GsonConverterFactory.create(gson))

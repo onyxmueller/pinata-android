@@ -9,10 +9,10 @@ plugins {
 fun getProperty(filename: String, propName: String): String? {
     val propsFile = rootProject.file(filename)
     if (propsFile.exists()) {
-        propsFile.inputStream().use { inputStream ->  // Resource management with 'use'
+        propsFile.inputStream().use { inputStream -> // Resource management with 'use'
             val properties = Properties()
             properties.load(inputStream)
-            return properties.getProperty(propName)  // Returns null if property not found
+            return properties.getProperty(propName) // Returns null if property not found
         }
     } else {
         return System.getenv(propName)
@@ -40,7 +40,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
