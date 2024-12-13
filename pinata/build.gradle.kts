@@ -72,6 +72,12 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    // Need this to mock Uri.fromFile(...)
+    // https://developer.android.com/training/testing/local-tests#error
+    @Suppress("UnstableApiUsage")
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 dependencies {
