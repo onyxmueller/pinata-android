@@ -5,6 +5,7 @@ import net.onyxmueller.pinata.files.FilesApi
 import net.onyxmueller.pinata.files.model.SignData
 import net.onyxmueller.pinata.files.model.UpdateData
 import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -89,6 +90,14 @@ internal class FilesApiTest : ApiAbstract<FilesApi>() {
         assertThat(responseUpdatedFile.keyValues["date"], `is`("2024"))
         assertThat(responseUpdatedFile.keyValues["location"], `is`("Hawaii"))
     }
-    
-    // TODO Write delete API test
+
+    @Test
+    fun deleteFileApiTest() = runTest {
+        enqueueResponse("delete.json")
+
+        val response = api.delete("11111111-2222-3333-4444-555555555555")
+        val responseDeletedFile = requireNotNull((response as PinataApiResponse.Success).data)
+
+        assertThat(responseDeletedFile, `is`(Unit))
+    }
 }
