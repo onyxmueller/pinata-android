@@ -3,6 +3,7 @@ package net.onyxmueller.pinata
 import kotlinx.coroutines.test.runTest
 import net.onyxmueller.pinata.files.FilesApi
 import net.onyxmueller.pinata.files.model.SignData
+import net.onyxmueller.pinata.files.model.UpdateData
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
@@ -67,6 +68,27 @@ internal class FilesApiTest : ApiAbstract<FilesApi>() {
         assertThat(url.host, `is`(gateway))
     }
 
-    // TODO Write update API test
+    @Test
+    fun updateFileApiTest() = runTest {
+        enqueueResponse("update.json")
+
+        val updateData = UpdateData(
+            name = "image.jpg",
+            keyvalues = mapOf(
+                "date" to "2024",
+                "location" to "Hawaii"
+            )
+        )
+
+        val response = api.update("11111111-2222-3333-4444-555555555555", updateData)
+        val responseUpdatedFile = requireNotNull((response as PinataApiResponse.Success).data)
+
+        assertThat(responseUpdatedFile.id, `is`("11111111-2222-3333-4444-555555555555"))
+        assertThat(responseUpdatedFile.name, `is`("image.jpg"))
+        assertThat(responseUpdatedFile.cid, `is`("AAAAAeigmtgespyq535sthcb7uj2vz7vszvx5k4tgw3k6v6nf33izjBBBBB"))
+        assertThat(responseUpdatedFile.keyValues["date"], `is`("2024"))
+        assertThat(responseUpdatedFile.keyValues["location"], `is`("Hawaii"))
+    }
+    
     // TODO Write delete API test
 }
