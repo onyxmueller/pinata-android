@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": "11111111-2222-3333-4444-555555555555",
+    "name": "image.jpg",
+    "cid": "AAAAAeigmtgespyq535sthcb7uj2vz7vszvx5k4tgw3k6v6nf33izjBBBBB",
+    "size": 2048,
+    "number_of_files": 1,
+    "mime_type": "image/jpeg",
+    "group_id": null,
+    "keyvalues": {
+      "date": "2024",
+      "location": "Hawaii"
+    },
+    "created_at": "2024-12-13T21:35:56.168339Z"
+  }
+}
