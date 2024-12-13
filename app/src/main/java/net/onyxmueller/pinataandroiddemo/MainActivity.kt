@@ -1,6 +1,5 @@
 package net.onyxmueller.pinataandroiddemo
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,7 +22,6 @@ import net.onyxmueller.pinata.onSuccess
 import net.onyxmueller.pinataandroiddemo.ui.theme.PinataAndroidSampleAppTheme
 import java.io.File
 import java.io.FileOutputStream
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,10 +77,10 @@ class MainActivity : ComponentActivity() {
             val file = File(filesDir, "image.jpg")
             val outputStream = FileOutputStream(file)
             val am = applicationContext.assets
-            val inputStream = am.open("15.jpg")
+            val inputStream = am.open("waterfall.jpg")
             inputStream.copyTo(outputStream)
 
-            val uploadPinataApiResult = pinataClient.files.upload(file.name, Uri.fromFile(file))
+            val uploadPinataApiResult = pinataClient.files.upload(file, "waterfall.jpg")
             uploadPinataApiResult.onSuccess{ uploadResponse ->
                 println("CID: ${uploadResponse.cid}")
             }.onError { code, message ->
