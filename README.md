@@ -1,4 +1,4 @@
-![header](https://docs.mypinata.cloud/ipfs/QmP9PGe3PdUqmsq8xY4sEW3qgdXx4WT9ictTWCb3qyzz3s?img-format=webp)<br>
+![header](assets/images/pinata_for_android.jpg)<br>
 
 <p align="center">
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
