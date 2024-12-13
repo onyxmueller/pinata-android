@@ -32,7 +32,6 @@ internal class FilesApiTest : ApiAbstract<FilesApi>() {
         assertThat(responseBody.files[0].cid, `is`("AAAAAeigmtgespyq535sthcb7uj2vz7vszvx5k4tgw3k6v6nf33izjBBBBB"))
     }
 
-    // TODO Write upload API test
     // TODO Write get API test
     // TODO Write sign API test
     // TODO Write update API test

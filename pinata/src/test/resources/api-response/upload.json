@@ -1,0 +1,13 @@
+{
+  "data": {
+    "id": "11111111-2222-3333-4444-555555555555",
+    "name": "image.jpg",
+    "cid": "AAAAAeigmtgespyq535sthcb7uj2vz7vszvx5k4tgw3k6v6nf33izjBBBBB",
+    "created_at": "2024-12-10T22:55:04.213Z",
+    "size": 2048,
+    "number_of_files": 1,
+    "mime_type": "image/jpeg",
+    "user_id": "100fbdb3-1111-2222-3333-977eaf0c66e8",
+    "is_duplicate": true
+  }
+}
