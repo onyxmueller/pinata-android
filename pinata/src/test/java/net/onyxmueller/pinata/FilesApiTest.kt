@@ -32,7 +32,18 @@ internal class FilesApiTest : ApiAbstract<FilesApi>() {
         assertThat(responseBody.files[0].cid, `is`("AAAAAeigmtgespyq535sthcb7uj2vz7vszvx5k4tgw3k6v6nf33izjBBBBB"))
     }
 
-    // TODO Write get API test
+    @Test
+    fun getFileApiTest() = runTest {
+        enqueueResponse("get.json")
+
+        val response = api.get("11111111-2222-3333-4444-555555555555")
+        val responseFile = requireNotNull((response as PinataApiResponse.Success).data)
+
+        assertThat(responseFile.id, `is`("11111111-2222-3333-4444-555555555555"))
+        assertThat(responseFile.name, `is`("image.jpg"))
+        assertThat(responseFile.cid, `is`("AAAAAeigmtgespyq535sthcb7uj2vz7vszvx5k4tgw3k6v6nf33izjBBBBB"))
+    }
+
     // TODO Write sign API test
     // TODO Write update API test
     // TODO Write delete API test
