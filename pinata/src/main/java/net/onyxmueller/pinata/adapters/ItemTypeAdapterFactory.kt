@@ -10,7 +10,6 @@ import com.google.gson.stream.JsonWriter
 
 internal class ItemTypeAdapterFactory : TypeAdapterFactory {
     override fun <T> create(gson: Gson, type: TypeToken<T>): TypeAdapter<T> {
-
         val delegate = gson.getDelegateAdapter(this, type)
         val elementAdapter = gson.getAdapter(JsonElement::class.java)
 

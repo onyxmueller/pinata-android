@@ -5,4 +5,21 @@ plugins {
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.nexus.plugin)
+    alias(libs.plugins.spotless)
+}
+
+subprojects {
+    apply(plugin = "com.diffplug.spotless")
+    configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+        kotlin {
+            target("**/*.kt")
+            targetExclude("$buildDir/**/*.kt")
+            ktlint()
+        }
+
+        kotlinGradle {
+            target("*.gradle.kts")
+            ktlint()
+        }
+    }
 }

@@ -11,6 +11,8 @@ import retrofit2.http.Part
 interface UploadsApi {
     @Multipart
     @POST("files")
-    suspend fun upload(@Part("name") name: RequestBody,
-                       @Part file: MultipartBody.Part?): PinataApiResponse<File>
+    suspend fun upload(
+        @Part("name") name: RequestBody,
+        @Part file: MultipartBody.Part?,
+    ): PinataApiResponse<File>
 }

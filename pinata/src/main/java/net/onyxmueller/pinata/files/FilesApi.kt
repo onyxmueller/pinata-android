@@ -24,17 +24,26 @@ interface FilesApi {
         @Query("limit") limit: Int? = null,
         @Query("order") order: Order? = null,
         @Query("pageToken") pageToken: String? = null,
-        ): PinataApiResponse<ListResponse>
+    ): PinataApiResponse<ListResponse>
 
     @GET("files/{id}")
-    suspend fun get(@Path("id") id: String): PinataApiResponse<File>
+    suspend fun get(
+        @Path("id") id: String,
+    ): PinataApiResponse<File>
 
     @POST("files/sign")
-    suspend fun sign(@Body signData: SignData): PinataApiResponse<String>
+    suspend fun sign(
+        @Body signData: SignData,
+    ): PinataApiResponse<String>
 
     @PUT("files/{id}")
-    suspend fun update(@Path("id") id: String, @Body updateData: UpdateData): PinataApiResponse<File>
+    suspend fun update(
+        @Path("id") id: String,
+        @Body updateData: UpdateData,
+    ): PinataApiResponse<File>
 
     @DELETE("files/{id}")
-    suspend fun delete(@Path("id") id: String): PinataApiResponse<Unit>
+    suspend fun delete(
+        @Path("id") id: String,
+    ): PinataApiResponse<Unit>
 }

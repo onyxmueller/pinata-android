@@ -32,15 +32,16 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding),
                     )
                 }
             }
         }
-        val pinataClient = PinataClient.get(
-            BuildConfig.PINATA_JWT_TOKEN,
-            BuildConfig.PINATA_GATEWAY
-        )
+        val pinataClient =
+            PinataClient.get(
+                BuildConfig.PINATA_JWT_TOKEN,
+                BuildConfig.PINATA_GATEWAY,
+            )
         CoroutineScope(Dispatchers.IO).launch {
             val pinataApiResult = pinataClient.files.list(order = Order.ASC)
             var firstFileId = ""
@@ -57,7 +58,8 @@ class MainActivity : ComponentActivity() {
 
             val getResponsePinataApiResult = pinataClient.files.get(firstFileId)
             getResponsePinataApiResult.onSuccess {
-                    getResponse -> println(getResponse.name)
+                    getResponse ->
+                println(getResponse.name)
             }.onError { code, message ->
                 println("Error: $code")
             }.onException { exception ->
@@ -81,7 +83,7 @@ class MainActivity : ComponentActivity() {
             inputStream.copyTo(outputStream)
 
             val uploadPinataApiResult = pinataClient.files.upload(file, "waterfall.jpg")
-            uploadPinataApiResult.onSuccess{ uploadResponse ->
+            uploadPinataApiResult.onSuccess { uploadResponse ->
                 println("CID: ${uploadResponse.cid}")
             }.onError { code, message ->
                 println("Error: $code\nMessage: $message")
@@ -99,14 +101,13 @@ class MainActivity : ComponentActivity() {
 //            }
 
             val updatePinataApiResult = pinataClient.files.update(firstFileId, "15.jpg", mapOf("location" to "Earth"))
-            updatePinataApiResult.onSuccess{ updateResponse ->
+            updatePinataApiResult.onSuccess { updateResponse ->
                 println("Name: ${updateResponse.name}")
             }.onError { code, message ->
                 println("Error: $code\nMessage: $message")
             }.onException { exception ->
                 println("Exception: $exception")
             }
-
         }
     }
 }
@@ -115,7 +116,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
-        modifier = modifier
+        modifier = modifier,
     )
 }
 

@@ -8,9 +8,9 @@ import net.onyxmueller.pinata.adapters.ItemTypeAdapterFactory
 import net.onyxmueller.pinata.adapters.PinataApiResponseCallAdapterFactory
 import net.onyxmueller.pinata.files.FileApiRequestHelper
 import net.onyxmueller.pinata.files.FilesApi
+import net.onyxmueller.pinata.files.Order
 import net.onyxmueller.pinata.files.UploadsApi
 import net.onyxmueller.pinata.files.model.File
-import net.onyxmueller.pinata.files.Order
 import net.onyxmueller.pinata.files.model.SignData
 import net.onyxmueller.pinata.files.model.UpdateData
 import net.onyxmueller.pinata.interceptors.AuthInterceptor
@@ -19,14 +19,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class PinataClient internal constructor(jwtToken: String, gatewayUrl: String) {
-
     @Volatile
     private var filesInstance: Files? = null
 
     private fun createRetrofit(baseUrl: String, okHttpClient: OkHttpClient): Retrofit {
-        val gson = GsonBuilder()
-            .registerTypeAdapterFactory(ItemTypeAdapterFactory())
-            .create()
+        val gson =
+            GsonBuilder()
+                .registerTypeAdapterFactory(ItemTypeAdapterFactory())
+                .create()
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
@@ -37,25 +37,28 @@ class PinataClient internal constructor(jwtToken: String, gatewayUrl: String) {
 
     private val getFilesApi: FilesApi by lazy {
         createRetrofit(
-            API_URL, OkHttpClient()
+            API_URL,
+            OkHttpClient()
                 .newBuilder()
                 .addInterceptor(AuthInterceptor(jwtToken))
-                .build()
+                .build(),
         ).create(FilesApi::class.java)
     }
 
     private val getUploadsApi: UploadsApi by lazy {
         createRetrofit(
-            UPLOADS_URL, OkHttpClient()
+            UPLOADS_URL,
+            OkHttpClient()
                 .newBuilder()
                 .addInterceptor(AuthInterceptor(jwtToken, true))
-                .build()
+                .build(),
         ).create(UploadsApi::class.java)
     }
 
     companion object {
         @Volatile
         private var instance: PinataClient? = null
+
         fun get(jwtToken: String, gatewayUrl: String): PinataClient =
             instance ?: synchronized(this) {
                 instance ?: PinataClient(jwtToken, gatewayUrl).also { instance = it }
@@ -73,7 +76,7 @@ class PinataClient internal constructor(jwtToken: String, gatewayUrl: String) {
     class Files internal constructor(
         private val filesApi: FilesApi,
         private val uploadsApi: UploadsApi,
-        private val gatewayUrl: String
+        private val gatewayUrl: String,
     ) {
         suspend fun list(
             name: String? = null,
@@ -83,7 +86,7 @@ class PinataClient internal constructor(jwtToken: String, gatewayUrl: String) {
             cidPending: Boolean? = null,
             limit: Int? = null,
             order: Order? = null,
-            pageToken: String? = null
+            pageToken: String? = null,
         ) = filesApi.list(
             name = name,
             group = group,
@@ -93,30 +96,31 @@ class PinataClient internal constructor(jwtToken: String, gatewayUrl: String) {
             // TODO: handle metadata filtering
             limit = limit,
             order = order,
-            pageToken = pageToken
+            pageToken = pageToken,
         )
 
         suspend fun get(id: String) = filesApi.get(id)
+
         suspend fun sign(
             cid: String,
             expires: Int,
             date: Long = System.currentTimeMillis(),
-            method: String = "GET"
+            method: String = "GET",
         ) =
             filesApi.sign(
                 SignData(
                     url = "https://$gatewayUrl/files/$cid",
                     expires = expires,
                     date = date,
-                    method = method
-                )
+                    method = method,
+                ),
             )
 
         suspend fun upload(file: java.io.File, customName: String? = null): PinataApiResponse<File> {
             val fileName = if (customName.isNullOrEmpty()) file.name else customName
             return uploadsApi.upload(
                 FileApiRequestHelper.toRequestBody(fileName),
-                FileApiRequestHelper.prepareFilePart("file", Uri.fromFile(file))
+                FileApiRequestHelper.prepareFilePart("file", Uri.fromFile(file)),
             )
         }
 
