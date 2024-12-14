@@ -13,7 +13,7 @@ subprojects {
     configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         kotlin {
             target("**/*.kt")
-            targetExclude("$buildDir/**/*.kt")
+            targetExclude("$layout.buildDirectory/**/*.kt")
             ktlint()
         }
 

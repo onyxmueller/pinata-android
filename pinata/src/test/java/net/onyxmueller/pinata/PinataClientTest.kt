@@ -19,7 +19,7 @@ class PinataClientTest {
             val mockFileList = mockFileList()
             whenever(client.files).thenReturn(files)
             whenever(client.files.list()).thenReturn(
-                _root_ide_package_.net.onyxmueller.pinata.PinataApiResponse.Success(
+                PinataApiResponse.Success(
                     ListResponse(mockFileList, ""),
                 ),
             )
@@ -43,7 +43,7 @@ class PinataClientTest {
             val mockFile = mockFile()
             whenever(client.files).thenReturn(files)
             whenever(client.files.get("11111111-2222-3333-4444-555555555555")).thenReturn(
-                _root_ide_package_.net.onyxmueller.pinata.PinataApiResponse.Success(
+                PinataApiResponse.Success(
                     mockFile,
                 ),
             )
