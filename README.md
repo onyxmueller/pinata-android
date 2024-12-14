@@ -37,7 +37,7 @@ To access the API, you'll need to pass your [Pinata API Key JWT](https://docs.pi
 // Upload a file
 val filesDir = applicationContext.filesDir
 val file = File(filesDir, "image.jpg")
-val uploadResult = pinataClient.files.upload(file.name, Uri.fromFile(file))
+val uploadResult = pinataClient.files.upload(file)
 
 // List all files
 val listResult = pinataClient.files.list()
@@ -87,8 +87,11 @@ response.onSuccess {
 ```
 
 ## Find this library useful? :raised_hands:
-Support it by joining __[stargazers](https://github.com/onyxmueller/pinata-android/stargazers)__ for this repository. :star: <br>
-And __[follow](https://github.com/onyxmueller)__ me for other creations.
+Support it by joining __[stargazers](https://github.com/onyxmueller/pinata-android/stargazers)__ for this repository. :star: And __[follow me](https://github.com/onyxmueller)__ for other creations.
+
+## Shoutouts :loudspeaker:
+
+- A big shoutout goes out to Erik ([@eriklubbers](https://github.com/ErikLubbers)) for reviewing and providing feedback.
 
 # License
 ```xml
