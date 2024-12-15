@@ -10,7 +10,7 @@ mavenPublishing {
     coordinates(
         "net.onyxmueller.pinata",
         artifactId,
-        "0.1.3",
+        "0.1.4",
     )
 
     pom {
@@ -56,10 +56,8 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
             )
         }
     }
@@ -83,7 +81,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
-    implementation(libs.gson)
+
     // unit test
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)

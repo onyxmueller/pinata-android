@@ -1,3 +1,0 @@
--keep class net.onyxmueller.pinata.PinataClient { *; }
--keep class net.onyxmueller.pinata.PinataApiResponse
--dontwarn java.lang.invoke.StringConcatFactory
