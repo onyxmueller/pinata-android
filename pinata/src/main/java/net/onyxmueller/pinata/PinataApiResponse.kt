@@ -6,8 +6,6 @@ sealed class PinataApiResponse<T : Any> {
     class Error<T : Any>(val code: Int, val message: String?) : PinataApiResponse<T>()
 
     class Exception<T : Any>(val e: Throwable) : PinataApiResponse<T>()
-
-    companion object
 }
 
 suspend fun <T : Any> PinataApiResponse<T>.onSuccess(
