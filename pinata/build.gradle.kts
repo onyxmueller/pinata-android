@@ -81,7 +81,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
-    implementation(libs.gson)
+
     // unit test
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
