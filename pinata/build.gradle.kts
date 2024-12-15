@@ -57,7 +57,7 @@ android {
     buildTypes {
         getByName("release") {
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt")
+                getDefaultProguardFile("proguard-android-optimize.txt"),
             )
         }
     }
