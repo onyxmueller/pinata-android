@@ -10,7 +10,7 @@ mavenPublishing {
     coordinates(
         "net.onyxmueller.pinata",
         artifactId,
-        "0.1.4",
+        "1.0.0",
     )
 
     pom {
