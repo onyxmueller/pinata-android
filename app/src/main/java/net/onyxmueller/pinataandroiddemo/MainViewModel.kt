@@ -14,6 +14,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
     val toastLiveData = MutableLiveData<String>()
 
     private val demoFilesFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
+
     @OptIn(ExperimentalCoroutinesApi::class)
     private val demoFilesListFlow =
         demoFilesFetchingIndex.flatMapLatest {
