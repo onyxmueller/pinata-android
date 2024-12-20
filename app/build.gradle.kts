@@ -1,9 +1,10 @@
 import java.util.Properties
 
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    id(libs.plugins.android.application.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlin.compose.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
 fun getProperty(filename: String, propName: String): String? {
@@ -26,7 +27,7 @@ android {
     defaultConfig {
         applicationId = "net.onyxmueller.pinataandroiddemo"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -54,11 +55,15 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+        dataBinding = true
     }
 }
 
 dependencies {
     implementation(project(":pinata"))
+
+    // android supports
+    implementation(libs.material)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -67,6 +72,11 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.cardview)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.appcompat)
+
+    implementation(libs.picasso)
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
