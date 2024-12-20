@@ -1,10 +1,10 @@
 package net.onyxmueller.pinataandroiddemo.adapter
 
-import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import net.onyxmueller.pinataandroiddemo.R
 import net.onyxmueller.pinataandroiddemo.data.DemoFile
 
 object RecyclerViewBinding {
@@ -25,6 +25,6 @@ object RecyclerViewBinding {
     @JvmStatic
     @BindingAdapter("loadImage")
     fun bindLoadImage(view: AppCompatImageView, url: String) {
-        Picasso.get().load(url).into(view)
+        Picasso.get().load(url).error(R.drawable.non_image).into(view)
     }
 }
