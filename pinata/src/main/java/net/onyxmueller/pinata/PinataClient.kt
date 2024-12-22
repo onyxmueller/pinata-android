@@ -23,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class PinataClient internal constructor(jwtToken: String, gatewayUrl: String) {
     @Volatile
     private var authenticationInstance: Authentication? = null
+
     @Volatile
     private var filesInstance: Files? = null
 
