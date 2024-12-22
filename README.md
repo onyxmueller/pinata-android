@@ -31,6 +31,20 @@ To access the API, you'll need to pass your [Pinata API Key JWT](https://docs.pi
         val pinataClient = PinataClient.get(PINATA_JWT_TOKEN, PINATA_GATEWAY)
 ```
 
+### Authentication API
+
+```kotlin
+// Test your API keys and your ability to connect to the Pinata API
+val testAuthResponse = pinataClient.authentication.test()
+testAuthResponse.onSuccess { response ->
+    // Handle success
+}.onError { code, message ->
+    // Handle error
+}.onException { exception ->
+    // Handle exception
+}
+```
+
 ### Files API
 
 ```kotlin
