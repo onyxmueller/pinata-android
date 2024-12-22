@@ -2,10 +2,12 @@ package net.onyxmueller.pinata
 
 import android.net.Uri
 import com.google.gson.GsonBuilder
+import net.onyxmueller.pinata.Constant.API_BASE_URL
 import net.onyxmueller.pinata.Constant.API_URL
 import net.onyxmueller.pinata.Constant.UPLOADS_URL
 import net.onyxmueller.pinata.adapters.ItemTypeAdapterFactory
 import net.onyxmueller.pinata.adapters.PinataApiResponseCallAdapterFactory
+import net.onyxmueller.pinata.authentication.AuthenticationApi
 import net.onyxmueller.pinata.files.FileApiRequestHelper
 import net.onyxmueller.pinata.files.FilesApi
 import net.onyxmueller.pinata.files.Order
@@ -20,6 +22,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class PinataClient internal constructor(jwtToken: String, gatewayUrl: String) {
     @Volatile
+    private var authenticationInstance: Authentication? = null
+
+    @Volatile
     private var filesInstance: Files? = null
 
     private fun createRetrofit(baseUrl: String, okHttpClient: OkHttpClient): Retrofit {
@@ -33,6 +38,16 @@ class PinataClient internal constructor(jwtToken: String, gatewayUrl: String) {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(PinataApiResponseCallAdapterFactory.create())
             .build()
+    }
+
+    private val getAuthenticationApi: AuthenticationApi by lazy {
+        createRetrofit(
+            API_BASE_URL,
+            OkHttpClient()
+                .newBuilder()
+                .addInterceptor(AuthInterceptor(jwtToken))
+                .build(),
+        ).create(AuthenticationApi::class.java)
     }
 
     private val getFilesApi: FilesApi by lazy {
@@ -65,12 +80,24 @@ class PinataClient internal constructor(jwtToken: String, gatewayUrl: String) {
             }
     }
 
+    val authentication: Authentication by lazy {
+        authenticationInstance ?: synchronized(this) {
+            authenticationInstance ?: Authentication(getAuthenticationApi).also {
+                authenticationInstance = it
+            }
+        }
+    }
+
     val files: Files by lazy {
         filesInstance ?: synchronized(this) {
             filesInstance ?: Files(getFilesApi, getUploadsApi, gatewayUrl).also {
                 filesInstance = it
             }
         }
+    }
+
+    class Authentication internal constructor(private val authenticationApi: AuthenticationApi) {
+        suspend fun test() = authenticationApi.test()
     }
 
     class Files internal constructor(
