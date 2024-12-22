@@ -17,7 +17,7 @@ Add the dependency below into your **module**'s `build.gradle` file:
 
 ```gradle
 dependencies {
-    implementation("net.onyxmueller.pinata:pinata:1.0.0")
+    implementation("net.onyxmueller.pinata:pinata:1.0.1")
 }
 ```
 
