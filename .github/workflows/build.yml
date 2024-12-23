@@ -25,6 +25,7 @@ jobs:
           PINATA_GATEWAY: "" # Empty value for CI build purposes
 
   build:
+    name: Assemble Debug
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
