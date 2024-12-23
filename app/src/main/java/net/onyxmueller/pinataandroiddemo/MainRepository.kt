@@ -19,15 +19,6 @@ class MainRepository(private val pinataClient: PinataClient) {
         onComplete: () -> Unit,
         onError: (String?) -> Unit,
     ) = flow {
-        val testResponse = pinataClient.authentication.test()
-        testResponse.onSuccess { authTestResponse ->
-            println(authTestResponse.message)
-        }.onError { code, message ->
-            onError(message)
-        }.onException { exception ->
-            onError(exception.message)
-        }
-
         var demoFiles: List<DemoFile> = emptyList()
         val response = pinataClient.files.list()
         response.onSuccess { listResponse ->
