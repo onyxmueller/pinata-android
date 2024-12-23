@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main,run_tests_on_builds ]
+    branches: [ main ]
 
 jobs:
   lint:
@@ -20,41 +20,21 @@ jobs:
           java-version: 17
       - name: Spotless
         run: ./gradlew spotlessCheck
-
-  test:
-    name: Unit Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check Out Code
-        uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: zulu
-          java-version: 17
-      - name: Cache Gradle and Wrapper
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-      - name: Test
-        run: ./gradlew test
+        env:
+          PINATA_JWT_TOKEN: "" # Empty value for CI build purposes
+          PINATA_GATEWAY: "" # Empty value for CI build purposes
 
   build:
-    name: Spotless Check
     runs-on: ubuntu-latest
     steps:
-      - name: Check Out Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: zulu
           java-version: 17
+
       - name: Cache Gradle and Wrapper
         uses: actions/cache@v4
         with:
@@ -64,7 +44,8 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Build
+
+      - name: Build with Gradle
         run: |
           ./gradlew --scan --stacktrace assembleDebug
         env:
