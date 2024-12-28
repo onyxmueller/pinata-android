@@ -44,7 +44,7 @@ jobs:
       - name: Test
         run: ./gradlew test
 
-  build:
+  debug_build:
     name: Assemble Debug
     runs-on: ubuntu-latest
     steps:
@@ -63,9 +63,35 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Build with Gradle
+      - name: Debug Build
         run: |
           ./gradlew --scan --stacktrace assembleDebug
+        env:
+          PINATA_JWT_TOKEN: "" # Empty value for CI build purposes
+          PINATA_GATEWAY: "" # Empty value for CI build purposes
+
+  release_build:
+    name: Assemble Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: 17
+      - name: Cache Gradle and Wrapper
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Release Build
+        run: |
+          ./gradlew --scan --stacktrace assembleRelease
         env:
           PINATA_JWT_TOKEN: "" # Empty value for CI build purposes
           PINATA_GATEWAY: "" # Empty value for CI build purposes
