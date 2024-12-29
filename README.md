@@ -3,7 +3,9 @@
 <p align="center">
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
   <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
-  <a href="https://github.com/onyxmueller/pinata-android/actions"><img alt="Build Status" src="https://github.com/onyxmueller/pinata-android/actions/workflows/build.yml/badge.svg"/></a>
+  <a href="https://github.com/onyxmueller/pinata-android/actions"><img alt="Build Status" src="https://github.com/onyxmueller/pinata-android/actions/workflows/build.yml/badge.svg"/></a> <br>
+  <a href="https://onyxmueller.net/2024/12/16/introducing-the-pinata-android-library/"><img alt="Blog Post" src="https://onyxmueller.net/static/favicon/favicon-32x32.png"/></a>
+  <a href="https://androidweekly.net/issues/issue-655"><img alt="Android Weekly Issue #655" src="https://androidweekly.net/assets/thumb.jpg"/></a>
 </p>
 
 [Pinata is the Internet's File API](https://pinata.cloud/), allowing you to upload, manage, and deliver your files effortlessly—no drama, no compromises. With Pinata Android library, you can now bring Pinata’s powerful file-handling capabilities directly into your Android/Kotlin apps quickly and easily.
