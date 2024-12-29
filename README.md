@@ -3,7 +3,9 @@
 <p align="center">
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
   <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
-  <a href="https://github.com/onyxmueller/pinata-android/actions"><img alt="Build Status" src="https://github.com/onyxmueller/pinata-android/actions/workflows/build.yml/badge.svg"/></a>
+  <a href="https://github.com/onyxmueller/pinata-android/actions"><img alt="Build Status" src="https://github.com/onyxmueller/pinata-android/actions/workflows/build.yml/badge.svg"/></a> <br>
+  <a href="https://onyxmueller.net/2024/12/16/introducing-the-pinata-android-library/"><img alt="Onyx Mueller Blog Post" src="https://img.shields.io/badge/Onyx_Mueller-Blog_Post-blue?color=%23F8D548&link=https%3A%2F%2Fonyxmueller.net%2F2024%2F12%2F16%2Fintroducing-the-pinata-android-library%2F"/></a>
+  <a href="https://androidweekly.net/issues/issue-655"><img alt="Android Weekly Issue #655" src="https://img.shields.io/badge/AndroidWeekly-Issue_655-blue?color=%235DB3E0&link=https%3A%2F%2Fandroidweekly.net%2Fissues%2Fissue-655"/></a>
 </p>
 
 [Pinata is the Internet's File API](https://pinata.cloud/), allowing you to upload, manage, and deliver your files effortlessly—no drama, no compromises. With Pinata Android library, you can now bring Pinata’s powerful file-handling capabilities directly into your Android/Kotlin apps quickly and easily.
